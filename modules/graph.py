@@ -6,8 +6,6 @@ class Vertex(object):
         self.row = int(row)
         self.col = int(col)
         self.PathCost = int(0)
-        self.HeuristicCost = int(0)
-        self.TotalCost = int(0)
         self.steps = 0
 
 class Graph(object):
@@ -15,7 +13,7 @@ class Graph(object):
     def __init__(self):
         self.graph_dict = {}
         self.vertex_list = []
-        self.possible_entries = []
+        self.possible_entries = [] #Not needed for TP2 possibly, must check
 
     def generate_from_file(self, file):
         with open(file) as f:
