@@ -18,7 +18,7 @@ def env_from_file(filepath):
     state_dict = {}
     
     with open(filepath) as inputfile:
-        state_grid = [[state for state in filter(lambda x: x not in ["\n", " "], list(line))] for line in inputfile]
+        state_grid = [[state for state in filter(lambda x: x in ["*", ".", "#", "$"], list(line))] for line in inputfile]
     
     # These for loops build the action state map, the order in witch the condition are verified matter,
     # keep that in mind.
