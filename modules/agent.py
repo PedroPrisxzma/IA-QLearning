@@ -1,4 +1,4 @@
-from modules.wip import State
+from modules.state import State
 from modules.action import Actions
 
 class Agent():
