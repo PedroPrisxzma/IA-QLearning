@@ -1,3 +1,5 @@
+import state 
+
 class Vertex(object):
     def __init__(self,  index, row, col, value, reward):
         self.index = int(index)
@@ -62,3 +64,24 @@ class Grid(object):
         else:
             return -10
         
+
+
+
+
+def printStates(stateDic, rewardMap, steps):
+    for(x in rows of rewardMap):
+        for(y in cols of rewardMap):
+            for(s in range(0, steps)):
+                if((x,y,s) in stateDic.keys())
+                    printState(stateDic[(x,y,s)])
+
+                else
+                    print((x, y, s), 'LEFT', 1)
+
+def printState(state):
+    maxValue = max(state.qvalues, key=state.qvalues.get())
+
+    print((state.posX, state.posY, state.steps), maxValue, maxValue)
+
+if __name__ == "__main__":
+    printState(State(1, 1, 2, 3))
