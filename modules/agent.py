@@ -19,9 +19,10 @@ class Agent:
         else:
             return State(x, y, state_grid[x][y], max_steps)
     
-    def epsilon_greedy_policy(self, epsilon, state):
+    @staticmethod
+    def epsilon_greedy_policy(epsilon, state):
         action_probabilities = [1.0, 1.0, 1.0, 1.0] * (epsilon / 4)
-        best_action = max(state.qvalues.values())
+        best_action = max(state.qvalues, key=state.qvalues.get)
         action_probabilities[best_action] += (1.0 - epsilon)
         return action_probabilities
 

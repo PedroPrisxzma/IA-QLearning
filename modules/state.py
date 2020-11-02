@@ -8,7 +8,7 @@ class State:
         self.steps = steps
         self.is_terminal = False if char == "." or char == "#" else True
         self.char = char
-        self.qvalues = {Actions.UP: 0, Actions.RIGHT: 0, Actions.DOWN: 0, Actions.LEFT: 0}
+        self.qvalues = {Actions.UP: 1.0, Actions.RIGHT: 1.0, Actions.DOWN: 1.0, Actions.LEFT: 1.0}
     
     #falta terminar
     def update_qvalue(learning_rate, discount_factor, next_state, action):
