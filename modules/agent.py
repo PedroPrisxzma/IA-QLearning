@@ -29,55 +29,41 @@ class Agent:
 
     def take_action(self, state, action):
         if action == Actions.UP and state.posX - 1 < 0:
-            return (State(None, None, None, None), -10, True)
+            return (State(None, None, None, None), -10)
         if action == Actions.DOWN and state.posX + 1 > len(self.reward_map):
-            return (State(None, None, None, None), -10, True)
+            return (State(None, None, None, None), -10)
         if action == Actions.LEFT and state.posY - 1 < 0:
-            return (State(None, None, None, None), -10, True)
+            return (State(None, None, None, None), -10)
         if action == Actions.RIGHT and state.posY + 1 > len(
             self.reward_map[state.posX]
         ):
-            return (State(None, None, None, None), -10, True)
+            return (State(None, None, None, None), -10)
 
         if action == Actions.UP:
             nextX = state.posX-1
             nextY = state.posY
-            next_char = self.state_grid[nextX][nextY]
-            next_steps = self.maxSteps if self.state_grid[nextX][nextY] == '#' else state.steps-1 
-            state = State(nextX, nextY, next_char, next_steps)
-            if(next_steps < 0 and next_char != '#'):
-                return (State(None, None, None, None), -10, True)
-            return (state, self.reward_map[nextX][nextY], state.is_terminal())
 
-        if action == Actions.DOWN:
+        elif action == Actions.DOWN:
             nextX = state.posX+1
-            nextY = state.posY
-            next_char = self.state_grid[nextX][nextY]
-            next_steps = self.maxSteps if self.state_grid[nextX][nextY] == '#' else state.steps-1 
-            state = State(nextX, nextY, next_char, next_steps)
-            if(next_steps < 0 and next_char != '#'):
-                return (State(None, None, None, None), -10, True)
-            return (state, self.reward_map[nextX][nextY], state.is_terminal())
+            nextY = state.posY 
 
-        if action == Actions.LEFT:
+        elif action == Actions.LEFT:
             nextX = state.posX
-            nextY = state.posY-1
-            next_char = self.state_grid[nextX][nextY]
-            next_steps = self.maxSteps if self.state_grid[nextX][nextY] == '#' else state.steps-1 
-            state = State(nextX, nextY, next_char, next_steps)
-            if(next_steps < 0 and next_char != '#'):
-                return (State(None, None, None, None), -10, True)
-            return (state, self.reward_map[nextX][nextY], state.is_terminal())
+            nextY = state.posY-1 
 
-        if action == Actions.RIGHT:
+        elif action == Actions.RIGHT:
             nextX = state.posX
             nextY = state.posY+1
-            next_char = self.state_grid[nextX][nextY]
-            next_steps = self.maxSteps if self.state_grid[nextX][nextY] == '#' else state.steps-1 
-            state = State(nextX, nextY, next_char, next_steps)
-            if(next_steps < 0 and next_char != '#'):
-                return (State(None, None, None, None), -10, True)
-            return (state, self.reward_map[nextX][nextY], state.is_terminal())
 
+        else:
+            print("WARNING NO ACTION TAKEN!!")
+            return (State(None, None, None, None), -10)
+
+        next_char = self.state_grid[nextX][nextY]
+        next_steps = self.maxSteps if next_char == '#' else state.steps-1 
+        state = State(nextX, nextY, next_char, next_steps)
+        if(next_steps < 0):
+            return (State(None, None, None, None), -10)
+        return (state, self.reward_map[nextX][nextY])
 
         
