@@ -9,7 +9,7 @@ class Agent():
         self.steps = steps
     
     def take_action(self, state, action):
-        if steps < 0:
+        if self.steps < 0:
             return (State(None, None, None), True)
         if action == Actions.UP and state.posX - 1 < 0:
             return (State(None, None, None), True)

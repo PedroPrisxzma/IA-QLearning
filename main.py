@@ -3,7 +3,7 @@ from modules.state import State
 
 
 def epsilon_greedy_policy(epsilon, state):
-    action_probabilities = [1, 1, 1, 1] * (epsilon / 4)
+    action_probabilities = [1.0, 1.0, 1.0, 1.0] * (epsilon / 4)
     best_action = max(state.qvalues.values())
     action_probabilities[best_action] += (1.0 - epsilon)
     return action_probabilities
