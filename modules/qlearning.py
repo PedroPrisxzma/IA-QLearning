@@ -20,7 +20,7 @@ def qLearning(
 
             action = random.choices([0, 1, 2, 3], weights=action_probabilities)
 
-            next_state, done = agent.take_action(current_state, action)
+            next_state, reward, done = agent.take_action(current_state, action)
 
             # update
             current_state.update_qvalue(
@@ -29,7 +29,7 @@ def qLearning(
 
             if done:
                 break
-            
+
             stateDic[(current_state.posX, current_state.posY, current_state.steps)] = current_state
 
             current_state = next_state
