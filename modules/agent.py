@@ -45,7 +45,7 @@ class Agent:
             next_char = self.state_grid[nextX][nextY]
             next_steps = self.maxSteps if self.state_grid[nextX][nextY] == '#' else state.steps-1 
             state = State(nextX, nextY, next_char, next_steps)
-            if(next_steps < 0):
+            if(next_steps < 0 and next_char != '#'):
                 return (State(None, None, None, None), -10, True)
             return (state, self.reward_map[nextX][nextY], state.is_terminal())
 
@@ -55,7 +55,7 @@ class Agent:
             next_char = self.state_grid[nextX][nextY]
             next_steps = self.maxSteps if self.state_grid[nextX][nextY] == '#' else state.steps-1 
             state = State(nextX, nextY, next_char, next_steps)
-            if(next_steps < 0):
+            if(next_steps < 0 and next_char != '#'):
                 return (State(None, None, None, None), -10, True)
             return (state, self.reward_map[nextX][nextY], state.is_terminal())
 
@@ -65,7 +65,7 @@ class Agent:
             next_char = self.state_grid[nextX][nextY]
             next_steps = self.maxSteps if self.state_grid[nextX][nextY] == '#' else state.steps-1 
             state = State(nextX, nextY, next_char, next_steps)
-            if(next_steps < 0):
+            if(next_steps < 0 and next_char != '#'):
                 return (State(None, None, None, None), -10, True)
             return (state, self.reward_map[nextX][nextY], state.is_terminal())
 
@@ -75,7 +75,7 @@ class Agent:
             next_char = self.state_grid[nextX][nextY]
             next_steps = self.maxSteps if self.state_grid[nextX][nextY] == '#' else state.steps-1 
             state = State(nextX, nextY, next_char, next_steps)
-            if(next_steps < 0):
+            if(next_steps < 0 and next_char != '#'):
                 return (State(None, None, None, None), -10, True)
             return (state, self.reward_map[nextX][nextY], state.is_terminal())
 
