@@ -11,7 +11,14 @@ class State:
         self.qvalues = {Actions.UP: 1.0, Actions.RIGHT: 1.0, Actions.DOWN: 1.0, Actions.LEFT: 1.0}
     
     #falta terminar
-    def update_qvalue(learning_rate, discount_factor, next_state, action):
-        max_next_state_qvalue = max(next_state.qvalues.values())
-        next_state.reward
+    def update_qvalue(learning_rate, reward, discount_factor, next_state, action):
+        max_next_state_qvalue = max(next_state.qvalues, key=next_state.qvalues.get)
 
+        self.qvalues[action] = self.qvalues[action] + 
+                                learning_rate * 
+                                    (
+                                        reward + 
+                                        discount_factor * 
+                                        max_next_state_qvalue -
+                                        self.qvalues[action]
+                                    )
