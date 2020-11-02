@@ -6,7 +6,7 @@ def qLearning(
     learning_rate, discount_factor, epsilon, reward_map, state_grid, max_steps, epochs
 ):
 
-    agent = Agent(learning_rate, discount_factor, reward_map, max_steps)
+    agent = Agent(learning_rate, discount_factor, reward_map, state_grid, max_steps)
 
     stateDic = {}
 
@@ -20,17 +20,17 @@ def qLearning(
 
             action = random.choices([0, 1, 2, 3], weights=action_probabilities)
 
-            next_state, reward, done = agent.take_action(current_state, action)
+            next_state, reward = agent.take_action(current_state, action)
 
             # update
             current_state.update_qvalue(
-                learning_rate, discount_factor, next_state, action
+                learning_rate, reward, discount_factor, next_state, action
             )
 
-            if done:
-                break
-
             stateDic[(current_state.posX, current_state.posY, current_state.steps)] = current_state
+
+            if next_state.is_terminal:
+                break
 
             current_state = next_state
 
