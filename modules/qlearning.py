@@ -1,22 +1,32 @@
-def qLearning():
+import random
+from modules.agent import Agent
 
-    for e in epochs:
 
-        currentState = choose_start(state_map)
+def qLearning(
+    learning_rate, discount_factor, epsilon, reward_map, state_grid, max_steps, epochs
+):
 
-        for t in state_map_size * 2:
+    agent = Agent(learning_rate, discount_factor, reward_map, max_steps)
 
-            action_probabilities = epsilon_greedy_policy(epsilon, currentState)
+    for _ in range(epochs):
 
-            action = random.choices([0,1,2,3], weights=action_probabilities)
+        current_state = Agent.choose_start(reward_map, state_grid, max_steps)
 
-            nextState, done = Agent.takeaction(currentState, action)
+        for _ in len(reward_map) * len(reward_map[0]) * 2:
 
-            #update
-            currentState.update_qvalue(learning_rate, discount_factor, next_state, action)
+            action_probabilities = agent.epsilon_greedy_policy(epsilon, current_state)
+
+            action = random.choices([0, 1, 2, 3], weights=action_probabilities)
+
+            nextState, done = agent.take_action(current_state, action)
+
+            # update
+            current_state.update_qvalue(
+                learning_rate, discount_factor, next_state, action
+            )
 
             if done:
                 break
 
         # ver como vai ser a saida no final
-        return(False)
+        return False
