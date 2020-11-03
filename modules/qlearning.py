@@ -11,6 +11,8 @@ def qLearning(
     stateDic = {}
     all_epochs = []
     epoch_rewards = []
+    every_5 = []
+    mean_every_5 = []
 
     for e in range(epochs):
 
@@ -36,11 +38,20 @@ def qLearning(
 
             if next_state.is_terminal:
                 epoch_rewards.append(epoch_reward)
+                every_5.append(epoch_reward)
                 break
 
             current_state = next_state
+        if(e % 5 == 0):
+            mean_every_5.append(sum(every_5) / len(every_5))
+            every_5 = [] 
         
-    print(all_epochs, epoch_rewards)
-    plt.plot(all_epochs[:len(epoch_rewards)], epoch_rewards)
+    plt.plot(epoch_rewards)
     plt.savefig('reward_cumulative.png')
+    plt.show()
+
+    plt.plot(mean_every_5)
+    plt.savefig('mean_every5.png')
+    plt.show()
+    
     return stateDic
