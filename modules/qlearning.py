@@ -18,11 +18,8 @@ def qLearning(
 
             action = Agent.epsilon_greedy_policy(epsilon, current_state)
 
-            print(action)
             next_state, reward = agent.take_action(current_state, action, stateDic)
-            print("Current")
             print(current_state)
-            print(reward)
 
             # update
             current_state.update_qvalue(

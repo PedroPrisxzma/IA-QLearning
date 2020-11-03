@@ -31,3 +31,4 @@ class State:
         print(" terminal:", self.is_terminal)
         print(" char:    ", self.char)
         print(" Qvalues: ", self.qvalues)
+        return ""

@@ -12,12 +12,10 @@ epochs = int(sys.argv[5])
 reward_map, state_grid = env_from_file(entry_file)
 steps = steps_from_file(entry_file)
 
-print(state_grid)
-
 finalStateDic = qLearning(learning_rate, discount_factor, epsilon, reward_map, state_grid, 
                             steps, epochs)
 
-print('a')
+print('Done')
 # Print saida
 
 # def printStates(stateDic, rewardMap, steps):
