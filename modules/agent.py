@@ -32,11 +32,11 @@ class Agent:
     def take_action(self, state, action, stateDic):
         if action == Actions.UP and state.posX - 1 < 0:
             return (State(None, None, None, None), -10)
-        if action == Actions.DOWN and state.posX + 1 > len(self.reward_map):
+        if action == Actions.DOWN and state.posX + 1 >= len(self.reward_map):
             return (State(None, None, None, None), -10)
         if action == Actions.LEFT and state.posY - 1 < 0:
             return (State(None, None, None, None), -10)
-        if action == Actions.RIGHT and state.posY + 1 > len(
+        if action == Actions.RIGHT and state.posY + 1 >= len(
             self.reward_map[state.posX]
         ):
             return (State(None, None, None, None), -10)
@@ -60,6 +60,7 @@ class Agent:
         else:
             print("WARNING NO ACTION TAKEN!!")
             return (State(None, None, None, None), -10)
+
 
         next_char = self.state_grid[nextX][nextY]
         next_steps = self.maxSteps if next_char == '#' else state.steps-1

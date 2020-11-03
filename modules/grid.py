@@ -32,7 +32,7 @@ def getReward(character):
     if(character == '.'):
         return -1
     elif(character == '#'):
-        return 0
+        return +1
     elif(character == '$'):
         return 10
     else:
