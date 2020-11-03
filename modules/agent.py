@@ -15,7 +15,6 @@ class Agent:
     def choose_start(reward_map, state_grid, max_steps):
         x = random.randrange(0, len(reward_map))
         y = random.randrange(0, len(reward_map[x]))
-        print("possible start", x, y, reward_map[x][y])
         if reward_map[x][y] == -10:
             return Agent.choose_start(reward_map, state_grid, max_steps)
         else:
@@ -69,7 +68,7 @@ class Agent:
             state = stateDic[(nextX, nextY, next_steps)] 
         else:
             state = State(nextX, nextY, next_char, next_steps)
-            
+
         if(next_steps < 0):
             return (State(None, None, None, None), -10)
         return (state, self.reward_map[nextX][nextY])
