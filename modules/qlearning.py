@@ -16,11 +16,9 @@ def qLearning(
 
         for _ in len(reward_map) * len(reward_map[0]) * 2:
 
-            action_probabilities = Agent.epsilon_greedy_policy(epsilon, current_state)
+            action = Agent.epsilon_greedy_policy(epsilon, current_state)
 
-            action = random.choices([0, 1, 2, 3], weights=action_probabilities)
-
-            next_state, reward = agent.take_action(current_state, action)
+            next_state, reward = agent.take_action(current_state, action, stateDic)
 
             # update
             current_state.update_qvalue(
@@ -34,5 +32,4 @@ def qLearning(
 
             current_state = next_state
 
-        # ver como vai ser a saida no final
-        return False
+        return stateDic

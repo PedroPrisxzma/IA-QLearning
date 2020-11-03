@@ -16,18 +16,20 @@ class Agent:
         x = random.randrange(0, len(reward_map))
         y = random.randrange(0, len(reward_map[x]))
         if reward_map[x][y] == -10:
-            Agent.choose_start(reward_map)
+            Agent.choose_start(reward_map, state_grid, max_steps)
         else:
             return State(x, y, state_grid[x][y], max_steps)
     
     @staticmethod
     def epsilon_greedy_policy(epsilon, state):
-        action_probabilities = [1.0, 1.0, 1.0, 1.0] * (epsilon / 4)
-        best_action = max(state.qvalues, key=state.qvalues.get)
-        action_probabilities[best_action] += (1.0 - epsilon)
-        return action_probabilities
+        greedChance = random.random()
+        if(greedChance < epsilon):
+            return random.choice([Actions.LEFT, Actions.UP, Actions.RIGHT, Actions.DOWN])
+        else:
+            max_action = max(state.qvalues, key=state.qvalues.get)
+            return max_action
 
-    def take_action(self, state, action):
+    def take_action(self, state, action, stateDic):
         if action == Actions.UP and state.posX - 1 < 0:
             return (State(None, None, None, None), -10)
         if action == Actions.DOWN and state.posX + 1 > len(self.reward_map):
@@ -61,7 +63,7 @@ class Agent:
 
         next_char = self.state_grid[nextX][nextY]
         next_steps = self.maxSteps if next_char == '#' else state.steps-1 
-        state = State(nextX, nextY, next_char, next_steps)
+        state = stateDic[(nextX, nextY, next_steps)] if (nextX, nextY, next_steps) in stateDic.keys() else State(nextX, nextY, next_char, next_steps)
         if(next_steps < 0):
             return (State(None, None, None, None), -10)
         return (state, self.reward_map[nextX][nextY])
