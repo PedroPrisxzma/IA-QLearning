@@ -1,6 +1,5 @@
 import modules 
 
-# falta pegar os steps da primeira linha do arquivo
 def env_from_file(filepath):
     """
     Returns the state action grid from a file.
@@ -9,6 +8,7 @@ def env_from_file(filepath):
     reward_map = []
 
     with open(filepath) as inputfile:
+        inputfile.readline()
         state_grid = [
             [state for state in filter(lambda x: x in ["*", ".", "#", "$"], list(line))]
             for line in inputfile
@@ -26,8 +26,7 @@ def env_from_file(filepath):
 def steps_from_file(filepath):
     with open(filepath) as inputfile:
         first_line = list(inputfile.readline().split(" "))
-    return first_line[2]
-
+    return int(first_line[2])
 
 def getReward(character):
     if(character == '.'):

@@ -14,11 +14,15 @@ def qLearning(
 
         current_state = Agent.choose_start(reward_map, state_grid, max_steps)
 
-        for _ in len(reward_map) * len(reward_map[0]) * 2:
+        for _ in range(0, len(reward_map) * len(reward_map[0]) * 2):
 
             action = Agent.epsilon_greedy_policy(epsilon, current_state)
 
+            print(action)
             next_state, reward = agent.take_action(current_state, action, stateDic)
+            print("Current")
+            print(current_state)
+            print(reward)
 
             # update
             current_state.update_qvalue(

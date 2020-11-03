@@ -22,3 +22,12 @@ class State:
         self.qvalues[action] = self.qvalues[action] + learning_rate * (
             reward + discount_factor * max_next_state_qvalue - self.qvalues[action]
         )
+
+    def __str__(self):
+        print("State:")
+        print(" posX:    ", self.posX)
+        print(" posY:    ", self.posY)
+        print(" steps:   ", self.steps)
+        print(" terminal:", self.is_terminal)
+        print(" char:    ", self.char)
+        print(" Qvalues: ", self.qvalues)

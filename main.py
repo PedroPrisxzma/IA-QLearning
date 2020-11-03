@@ -1,33 +1,36 @@
+import sys
 import random
-from modules.state import State
+from modules import *
+
+entry_file = sys.argv[1]
+learning_rate = float(sys.argv[2])
+epsilon = float(sys.argv[3])
+discount_factor = float(sys.argv[4])
+epochs = int(sys.argv[5])
 
 
-def env_from_file(filepath):
-    """
-    Returns the state action grid from a file.
-    """
+reward_map, state_grid = env_from_file(entry_file)
+steps = steps_from_file(entry_file)
 
-    reward_map = []
+print(state_grid)
 
-    with open(filepath) as inputfile:
-        state_grid = [
-            [state for state in filter(lambda x: x in ["*", ".", "#", "$"], list(line))]
-            for line in inputfile
-        ]
+finalStateDic = qLearning(learning_rate, discount_factor, epsilon, reward_map, state_grid, 
+                            steps, epochs)
 
-    for i in range(len(state_grid)):
-        reward_line = []
-        for j in range(len(state_grid[i])):
-            char = state_grid[i][j]
-            if(char == '.'):
-                reward_line.append(-1)
-            elif(char == '#'):
-                reward_line.append(1)
-            elif(char == '$'):
-                reward_line.append(10)
-            else:
-                reward_line.append(-10)
-        reward_map.append(reward_line)
+print('a')
+# Print saida
 
-    return reward_map, state_grid
+# def printStates(stateDic, rewardMap, steps):
+#     for(x in rows of rewardMap):
+#         for(y in cols of rewardMap):
+#             for(s in range(0, steps)):
+#                 if((x,y,s) in stateDic.keys())
+#                     printState(stateDic[(x,y,s)])
 
+#                 else
+#                     print((x, y, s), 'LEFT', 1)
+
+# def printState(state):
+#     maxValue = max(state.qvalues, key=state.qvalues.get())
+
+#     print((state.posX, state.posY, state.steps), maxValue, maxValue)
